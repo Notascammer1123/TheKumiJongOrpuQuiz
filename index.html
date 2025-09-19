@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kumi's Amazing Quiz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background: #f5f5f5;
+    }
+    #question-box {
+      margin-top: 20px;
+      font-size: 1.2rem;
+      padding: 20px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      text-align: center;
+      width: 80%;
+      max-width: 500px;
+      transition: background-color 0.3s;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      background-color: #4CAF50;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s;
+      margin-top: 10px;
+    }
+    button:disabled {
+      background-color: #aaa;
+      cursor: not-allowed;
+    }
+    button:hover:not(:disabled) {
+      background-color: #45a049;
+    }
+    #answer-input {
+      margin-top: 15px;
+      padding: 10px;
+      width: 80%;
+      max-width: 400px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>Click for a Question</h1>
+  <button id="nextBtn">Show Next Question</button>
+  <div id="question-box">Click the button to start!</div>
+  <input type="text" id="answer-input" placeholder="Type your answer here" disabled />
+  <button id="checkBtn" disabled>Check Answer</button>
+
+  <script>
+    const questions = [
+      "What is the movie you can watch for free on ZornHub?",
+      "When was TF2 released?",
+      "When was Skyrim released?",
+      "How many minigames are there on ZornHub (in numbers)?",
+      "Does the channel kumi jong orpu have breasts prominently displayed on their pfp? (yes/no)",
+      "What is the main character called in Skyrim?",
+      "Is TF2 free to play (yes/no)?",
+      "Who made/released TF2?",
+      "Has Kumi ever done a face reveal (yes/no)?",
+      "Who is Kumi's favorite superhero (include all hyphens, symbols, etc)?",
+      "When was UltraKill released?",
+      "Which country became extremely popular for Skycraft tornaments",
+      "When was Undertale released?",
+      "Which countries are most likely to show up during Kumi's streams ",
+      "Since when has Kumi been streaming (Year, Month)",
+      "Does Kumi have a wife (from Kumi's perspective. yes/no)",
+      "Who is named Nikole on the Minecraft server?",
+      "What does the text at the start of stream say?",
+      "What is the name of the emoji made by Geo?",
+      "What was the Word of the day on 18th of September",
+      "What is the last emoji/GIF on the bottom in Kumi's stream overlay?"
+    ];
+
+    const answers = [
+      "A Minecraft Movie",
+      "2007",
+      "2011",
+      "3",
+      "No",
+      "DragonBorn",
+      "Yes",
+      "Valve",
+      "Yes",
+      "Spider-Man",
+      "2020",
+      "2015",
+      "Czechia",
+      "2019, January",
+      "Yes",
+      "Stolapen",
+      "kimjon10Pozustatek",
+      "Kominik",
+      "William Afton"
+    ];
+
+    let index = 0;
+    const button = document.getElementById('nextBtn');
+    const box = document.getElementById('question-box');
+    const input = document.getElementById('answer-input');
+    const checkBtn = document.getElementById('checkBtn');
+
+    button.addEventListener('click', () => {
+      if (index < questions.length) {
+        box.textContent = questions[index];
+        box.style.backgroundColor = 'white'; // reset background
+        input.disabled = false;
+        input.value = "";
+        checkBtn.disabled = false;
+      }
+      if (index === questions.length - 1) {
+        button.disabled = true;
+        button.textContent = "No more questions";
+      }
+    });
+
+    checkBtn.addEventListener('click', () => {
+      const userAnswer = input.value.trim().toLowerCase();
+      const correctAnswer = answers[index].toLowerCase();
+      if (userAnswer === correctAnswer) {
+        alert("Correct!");
+        index++;
+        input.value = "";
+        input.disabled = true;
+        checkBtn.disabled = true;
+      } else {
+        alert("Try again!");
+        box.style.backgroundColor = '#ff4d4d'; // red background for wrong answer
+      }
+    });
+  </script>
+</body>
+</html>
